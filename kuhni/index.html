@@ -228,7 +228,8 @@ function render(){
       f('lpe').hidden=true;
       const ph='+7 '+dg.slice(0,3)+' '+dg.slice(3,6)+'-'+dg.slice(6,8)+'-'+dg.slice(8);
       const txt=`Заявка на бесплатный замер кухни\nИмя: ${L.name}\nТелефон: ${ph}\nГород: ${L.city}${L.time?`\nКогда удобно: ${L.time}`:''}\n\nРасчёт из калькулятора: ${sh.name.toLowerCase()} кухня, ${sizes} (${m(c.L)} п.м.), высота: ${H.name.toLowerCase()}.\nПримерная цена: ${fmt(c.low)}–${fmt(c.high)} ₽${promo?`, со скидкой 15%: ${fmt(d(c.low))}–${fmt(d(c.high))} ₽`:''}.\nИсточник: калькулятор кухни${SRC==='vk'?', ВКонтакте':SRC==='avito'?', Авито':''}.`;
-      const payload={name:L.name,phone:ph,city:L.city,time:L.time,shape:sh.name,sizes:sizes+' ('+m(c.L)+' п.м.)',height:H.name+', '+H.h,price:fmt(c.low)+'–'+fmt(c.high)+' ₽',priceDeal:promo?fmt(d(c.low))+'–'+fmt(d(c.high))+' ₽':'',src:SRC==='vk'?'ВКонтакте':SRC==='vkads'?'ВК таргет':SRC==='avito'?'Авито':(SRC||'сайт'),website:(f('hp')||{}).value||''};
+      const clean=v=>String(v||'').replace(/^[=+\-@\s]+/,'');
+      const payload={name:clean(L.name),phone:'8 ('+dg.slice(0,3)+') '+dg.slice(3,6)+'-'+dg.slice(6,8)+'-'+dg.slice(8),city:L.city,time:clean(L.time),shape:sh.name,sizes:sizes+' ('+m(c.L)+' п.м.)',height:H.name+', '+H.h,price:fmt(c.low)+'–'+fmt(c.high)+' ₽',priceDeal:promo?fmt(d(c.low))+'–'+fmt(d(c.high))+' ₽':'',src:SRC==='vk'?'ВКонтакте':SRC==='vkads'?'ВК таргет':SRC==='avito'?'Авито':(SRC||'сайт'),website:(f('hp')||{}).value||''};
       const btn=f('ls'); btn.disabled=true; btn.textContent='Отправляем…';
       const ctrl=('AbortController' in window)?new AbortController():null; const tm=setTimeout(()=>ctrl&&ctrl.abort(),12000);
       fetch(LEADS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),signal:ctrl?ctrl.signal:undefined})
