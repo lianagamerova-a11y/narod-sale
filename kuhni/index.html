@@ -125,7 +125,8 @@ const ICON={
   u:'<rect x="10" y="12" width="80" height="14" rx="2"/><rect x="10" y="26" width="14" height="30" rx="2"/><rect x="76" y="26" width="14" height="30" rx="2"/>',
   island:'<rect x="10" y="12" width="80" height="14" rx="2"/><rect x="28" y="38" width="44" height="14" rx="2"/>'
 };
-const VK_GROUP=''; // адрес сообщества, например 'narodnaya_mebel' — тогда кнопка откроет vk.me/<адрес>
+const VK_GROUP='';
+const LEADS_URL='https://script.google.com/macros/s/AKfycbw89ukimuCiI_Iyl8R6IJ9s0UIsUIZXLmmDyAzETiRm3eTUUTDZoJMlMWwcfYpb857qUQ/exec'; // адрес сообщества, например 'narodnaya_mebel' — тогда кнопка откроет vk.me/<адрес>
 const HEIGHTS={
   std:{name:'Стандартная',h:'около 2,15 м',desc:'Верхние шкафы обычной высоты, над ними остаётся место до потолка.',a:20000,b:22000,k:1},
   high:{name:'Высокая',h:'около 2,35 м',desc:'Верхние шкафы выше — больше места для посуды. Выбирают чаще всего.',a:13000,b:42600,k:1},
@@ -211,6 +212,7 @@ function render(){
         <div class="fld"><label for="lc">Город</label><select id="lc"><option>Набережные Челны</option><option>Нижнекамск</option><option>Другой город рядом</option></select></div>
         <div class="fld"><label for="lt">Когда удобно на замер <span class="opt-l">— необязательно</span></label><input id="lt" placeholder="например, в субботу после 12" value=""></div>
         <label class="toggle" for="lok"><input type="checkbox" id="lok"><span><small style="color:var(--ink)">Согласен(на) на обработку персональных данных для связи по заявке</small></span></label>
+        <input id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <button class="btn main" id="ls" type="submit">Отправить заявку на замер</button>
       </form>
       <div id="done" hidden></div>
@@ -226,19 +228,19 @@ function render(){
       f('lpe').hidden=true;
       const ph='+7 '+dg.slice(0,3)+' '+dg.slice(3,6)+'-'+dg.slice(6,8)+'-'+dg.slice(8);
       const txt=`Заявка на бесплатный замер кухни\nИмя: ${L.name}\nТелефон: ${ph}\nГород: ${L.city}${L.time?`\nКогда удобно: ${L.time}`:''}\n\nРасчёт из калькулятора: ${sh.name.toLowerCase()} кухня, ${sizes} (${m(c.L)} п.м.), высота: ${H.name.toLowerCase()}.\nПримерная цена: ${fmt(c.low)}–${fmt(c.high)} ₽${promo?`, со скидкой 15%: ${fmt(d(c.low))}–${fmt(d(c.high))} ₽`:''}.\nИсточник: калькулятор кухни${SRC==='vk'?', ВКонтакте':SRC==='avito'?', Авито':''}.`;
-      const url=VK_GROUP?'https://vk.me/'+VK_GROUP:'';
-      f('lf').hidden=true;const dn=f('done');dn.hidden=false;
-      dn.innerHTML=`<div class="steps2"><p><b>Остался последний шаг.</b> Мы скопировали вашу заявку — отправьте её нам в сообщения сообщества ВКонтакте, и менеджер перезвонит, чтобы согласовать время замера.</p>
-        <ol><li>${url?'Нажмите «Открыть сообщения ВКонтакте».':'Откройте наше сообщество ВКонтакте и нажмите «Написать сообщение».'}</li><li>Вставьте текст заявки и нажмите «Отправить».</li></ol></div>
-        <pre class="copybox" id="cb"></pre>
-        <p class="note" style="margin-top:10px">Удобнее по телефону или в MAX? <b style="color:var(--ink);white-space:nowrap">8 967 372 90 76</b> — назовите размеры кухни, и мы запишем на замер.</p>
-        <div class="nav">${url?`<a class="btn main" id="vk" href="${url}" target="_blank" rel="noopener">Открыть сообщения ВКонтакте</a>`:''}<button class="btn${url?'':' main'}" id="cp" type="button">Скопировать заявку</button></div>`;
-      f('cb').textContent=txt;
-      const cp=f('cp');
-      const copy=()=>{const ok=()=>{cp.textContent='Скопировано'};
-        const fb=()=>{const r=document.createRange();r.selectNodeContents(f('cb'));const s=getSelection();s.removeAllRanges();s.addRange(r);let k=false;try{k=document.execCommand('copy')}catch(e){}cp.textContent=k?'Скопировано':'Текст выделен — скопируйте его'};
-        if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,fb);else fb()};
-      cp.onclick=copy;copy();if(f('vk'))f('vk').addEventListener('click',copy);
+      const payload={name:L.name,phone:ph,city:L.city,time:L.time,shape:sh.name,sizes:sizes+' ('+m(c.L)+' п.м.)',height:H.name+', '+H.h,price:fmt(c.low)+'–'+fmt(c.high)+' ₽',priceDeal:promo?fmt(d(c.low))+'–'+fmt(d(c.high))+' ₽':'',src:SRC==='vk'?'ВКонтакте':SRC==='vkads'?'ВК таргет':SRC==='avito'?'Авито':(SRC||'сайт'),website:(f('hp')||{}).value||''};
+      const btn=f('ls'); btn.disabled=true; btn.textContent='Отправляем…';
+      const ctrl=('AbortController' in window)?new AbortController():null; const tm=setTimeout(()=>ctrl&&ctrl.abort(),12000);
+      fetch(LEADS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),signal:ctrl?ctrl.signal:undefined})
+      .then(()=>{clearTimeout(tm);showDone(true)})
+      .catch(()=>{clearTimeout(tm);showDone(false)});
+      function showDone(ok){
+        f('lf').hidden=true;const dn=f('done');dn.hidden=false;
+        dn.innerHTML=ok?`<div class="steps2"><p><b>Заявка принята!</b> Менеджер перезвонит вам в рабочее время, чтобы согласовать день замера. Скидку 15% закрепим за вами.</p><p class="note">Если удобнее — позвоните или напишите в MAX: <b style="color:var(--ink);white-space:nowrap">8 967 372 90 76</b>.</p></div>`
+        :`<div class="steps2"><p><b>Не получилось отправить заявку автоматически.</b> Скопируйте её и отправьте нам в сообщения сообщества ВКонтакте или в MAX на номер <b style="color:var(--ink);white-space:nowrap">8 967 372 90 76</b>.</p></div><pre class="copybox" id="cb"></pre><div class="nav"><button class="btn main" id="cp" type="button">Скопировать заявку</button></div>`;
+        if(!ok){f('cb').textContent=txt;const cp=f('cp');cp.onclick=()=>{const done=()=>{cp.textContent='Скопировано'};const fb=()=>{const r=document.createRange();r.selectNodeContents(f('cb'));const s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent='Текст выделен — скопируйте его'};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,fb);else fb()}}
+        dn.scrollIntoView({block:'center'});
+      }
     };
     f('back').onclick=()=>{S.step=0;render();window.scrollTo({top:0})};
     return;
