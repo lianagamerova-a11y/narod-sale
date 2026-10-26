@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Посчитайте примерную цену кухни на заказ за минуту и запишитесь на бесплатный замер. Набережные Челны и Нижнекамск.">
+<meta property="og:title" content="Сколько будет стоить ваша кухня"><meta property="og:description" content="3 вопроса — и примерная цена по нашим последним кухням. Замер бесплатно.">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Калькулятор кухни — Народная мебель</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow column, a 3-step questionnaire on a "worktop" card, result card at the end */
+:root{
+  --bg:#eef0ec; --surface:#ffffff; --ink:#1d2622; --muted:#5f6b65; --line:#d6dbd5;
+  --accent:#2f5d50; --accent-ink:#ffffff; --accent-soft:#dfe9e4; --oak:#a8773d; --oak-soft:#f3e8d9;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --sans:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121715; --surface:#1b2220; --ink:#e7ece9; --muted:#9aa7a1; --line:#2c3632;
+  --accent:#6fbfa4; --accent-ink:#0c1a15; --accent-soft:#1d322b; --oak:#d6a466; --oak-soft:#2e2619; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715; --surface:#1b2220; --ink:#e7ece9; --muted:#9aa7a1; --line:#2c3632;
+  --accent:#6fbfa4; --accent-ink:#0c1a15; --accent-soft:#1d322b; --oak:#d6a466; --oak-soft:#2e2619; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:640px;margin:0 auto}
+header{padding-block:32px 20px;display:flex;flex-direction:column;gap:8px}
+.brand{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--oak);font-weight:600}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,6vw,34px);line-height:1.15;margin:0;text-wrap:balance}
+.intro{color:var(--muted);margin:0;max-width:52ch}
+.steps{display:flex;gap:6px;margin-bottom:12px}
+.steps span{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.steps span.on{background:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:18px}
+.q{font-family:var(--display);font-weight:500;font-size:19px;line-height:1.3;margin:0;text-wrap:balance}
+.qn{font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.04em}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opt{font:inherit;color:var(--ink);text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt svg{width:100%;height:64px}
+.opt b{font-weight:600}
+.opt small{color:var(--muted);font-size:13px;line-height:1.4}
+.tiers{grid-template-columns:1fr}
+.tier{flex-direction:row;align-items:flex-start;gap:12px}
+.sw{flex:0 0 44px;height:44px;border-radius:8px;border:1px solid var(--line)}
+.walls{display:flex;flex-direction:column;gap:12px}
+.wall{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.wall label{font-weight:500}
+.wall small{display:block;color:var(--muted);font-size:13px;font-weight:400}
+.stepper{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.stepper button{font:inherit;font-size:20px;width:44px;height:44px;border:0;background:var(--surface);color:var(--accent);cursor:pointer}
+.stepper input{font:inherit;font-size:17px;font-weight:600;width:72px;height:44px;border:0;border-inline:1px solid var(--line);text-align:center;background:var(--surface);color:var(--ink);font-variant-numeric:tabular-nums}
+.total{background:var(--oak-soft);border-radius:10px;padding:10px 14px;font-size:15px}
+.total b{font-variant-numeric:tabular-nums}
+.toggle{display:flex;align-items:flex-start;gap:12px;cursor:pointer;border:1.5px solid var(--line);border-radius:12px;padding:12px}
+.toggle input{width:22px;height:22px;accent-color:var(--accent);margin:2px 0 0;flex:0 0 auto}
+.toggle small{display:block;color:var(--muted);font-size:13px}
+.nav{display:flex;gap:10px;justify-content:space-between}
+.btn{font:inherit;font-weight:600;font-size:16px;border-radius:12px;padding:13px 20px;cursor:pointer;border:1.5px solid var(--accent);background:transparent;color:var(--accent)}
+.btn.main{background:var(--accent);color:var(--accent-ink);flex:1}
+.btn[hidden]{display:none}
+button:focus-visible,input:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
+.res-label{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.price{font-family:var(--display);font-weight:700;font-size:clamp(26px,7.5vw,38px);line-height:1.1;font-variant-numeric:tabular-nums;color:var(--accent)}
+.sub{color:var(--muted);font-size:15px}
+.deal{background:var(--oak-soft);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px}
+.deal .price{font-size:clamp(22px,6vw,30px);color:var(--oak)}
+.old{text-decoration:line-through;color:var(--muted);font-size:15px;font-variant-numeric:tabular-nums}
+.sum{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:15px}
+.sum dt{color:var(--muted)} .sum dd{margin:0;font-weight:500}
+.ex h3{font-size:15px;margin:0 0 6px;font-weight:600}
+.ex ul{margin:0;padding-left:18px;font-size:15px}
+.ex li{margin:3px 0}
+.copybox{white-space:pre-wrap;font:inherit;font-size:14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;margin:0}
+.note{font-size:13px;color:var(--muted);margin:0}
+.hico{flex:0 0 40px;width:40px;height:48px}
+.hh{color:var(--muted);font-weight:400}
+.lead{border-color:var(--oak);margin-top:14px}
+#lf{display:flex;flex-direction:column;gap:14px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-weight:500;font-size:15px}
+.opt-l{color:var(--muted);font-weight:400}
+.fld input,.fld select{font:inherit;font-size:16px;padding:12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);width:100%}
+.fld input:focus,.fld select:focus{border-color:var(--accent);outline:none}
+.err{color:#b3261e;font-size:13px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+a.btn{text-decoration:none;text-align:center}
+#done{display:flex;flex-direction:column;gap:14px}
+.steps2 p{margin:0 0 8px}.steps2 ol{margin:0;padding-left:20px}
+@media (max-width:420px){.opts{gap:8px}.opt{padding:10px}.card{padding:16px}}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .25s ease-out}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="brand">Народная мебель · кухни на заказ</div>
+  <h1>Сколько будет стоить ваша кухня</h1>
+  <p class="intro">Ответьте на 3 вопроса — покажем примерную цену по нашим последним кухням и запишем на бесплатный замер. Набережные Челны и Нижнекамск.</p>
+</header>
+<div class="steps" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<main id="app"></main>
+</div>
+
+<script>
+const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/,/g,' ');
+const m=n=>(Math.round(n*100)/100).toLocaleString('ru-RU');
+const SHAPES={
+  line:{name:'Прямая',hint:'вдоль одной стены',walls:['Длина стены']},
+  corner:{name:'Угловая',hint:'Г-образная, на две стены',walls:['Первая стена','Вторая стена']},
+  u:{name:'П-образная',hint:'на три стены',walls:['Левая стена','Центральная стена','Правая стена']},
+  island:{name:'С островом',hint:'кухня у стены + остров',walls:['Кухня у стены','Длина острова']}
+};
+const DEF={line:[2.4],corner:[2.4,1.6],u:[1.6,2.6,1.6],island:[3.2,1.8]};
+const ICON={
+  line:'<rect x="10" y="12" width="80" height="14" rx="2"/>',
+  corner:'<rect x="10" y="12" width="80" height="14" rx="2"/><rect x="10" y="26" width="14" height="30" rx="2"/>',
+  u:'<rect x="10" y="12" width="80" height="14" rx="2"/><rect x="10" y="26" width="14" height="30" rx="2"/><rect x="76" y="26" width="14" height="30" rx="2"/>',
+  island:'<rect x="10" y="12" width="80" height="14" rx="2"/><rect x="28" y="38" width="44" height="14" rx="2"/>'
+};
+const VK_GROUP=''; // адрес сообщества, например 'narodnaya_mebel' — тогда кнопка откроет vk.me/<адрес>
+const HEIGHTS={
+  std:{name:'Стандартная',h:'около 2,15 м',desc:'Верхние шкафы обычной высоты, над ними остаётся место до потолка.',a:20000,b:22000,k:1},
+  high:{name:'Высокая',h:'около 2,35 м',desc:'Верхние шкафы выше — больше места для посуды. Выбирают чаще всего.',a:13000,b:42600,k:1},
+  ceil:{name:'До потолка',h:'2,5 м и выше',desc:'Антресоли до потолка — максимум хранения, не собирается пыль.',a:13000,b:42600,k:1.08}
+};
+const EX=[
+  {n:'Прямая «Сура Глетчер» 4,0 м',h:'high',s:'line',p:193179},
+  {n:'Угловая «Стенд Пасадена» 1,85 × 1,4 м',h:'std',s:'corner',p:66860},
+  {n:'Прямая «Стенд Бетон» 2,6 м',h:'high',s:'line',p:139884},
+  {n:'Прямая «Сура Мемфис» 2,3 м',h:'high',s:'line',p:104761},
+  {n:'Прямая «Стенд Бетон» 1,95 м',h:'std',s:'line',p:62875},
+  {n:'Угловая «Сиэль Инь» 2,8 × 1,4 м',h:'high',s:'corner',p:191949},
+  {n:'Прямая «Стенд Бетоны» 2,4 м, высота 2,5 м',h:'ceil',s:'line',p:123879},
+  {n:'Прямая «Сура Сиэль Инь» 2,25 м',h:'high',s:'line',p:110027},
+  {n:'Угловая «Сура Мемфис» 1,65 × 1,55 м',h:'high',s:'corner',p:127346},
+  {n:'Прямая «Сура Иеалиста» 2,5 м',h:'high',s:'line',p:114085}
+];
+const PROMO_END=new Date(2026,10,30,23,59,59);
+const OCT=new Date()<=new Date(2026,9,31,23,59,59);
+const PROMO_LABEL=OCT?'Со скидкой 15% до 31 октября':'Со скидкой 15% — «Чёрный ноябрь», до 30 ноября';
+const SRC=(()=>{try{return new URLSearchParams(location.search).get('src')||''}catch(e){return ''}})();
+const S={step:0,shape:'corner',sizes:{},height:'high',lead:{name:'',phone:'',city:'Набережные Челны',time:'',ok:false}};
+for(const k in DEF)S.sizes[k]=[...DEF[k]];
+
+function calc(){
+  const w=S.sizes[S.shape];const L=w.reduce((a,b)=>a+b,0);const H=HEIGHTS[S.height];
+  let est=(H.a+H.b*L)*H.k;
+  if(S.shape==='island')est*=1.1;
+  const r=x=>Math.round(x/1000)*1000;
+  return{L,low:r(est*0.92),high:r(est*1.12),perLow:r(est*0.92/L),perHigh:r(est*1.12/L)};
+}
+function examples(){
+  const sc=e=>(e.h===S.height?2:0)+(e.s===S.shape||(S.shape!=='line'&&e.s==='corner')?1:0);
+  return EX.map((e,i)=>[e,sc(e)*10-i/100]).sort((x,y)=>y[1]-x[1]).slice(0,3).map(x=>x[0]);
+}
+const app=document.getElementById('app');
+function h(html){const t=document.createElement('template');t.innerHTML=html.trim();return t.content}
+function bar(){[...document.querySelectorAll('.steps span')].forEach((s,i)=>s.classList.toggle('on',i<=S.step))}
+function nav(back,next,label){return `<div class="nav">${back?'<button class="btn" id="back">Назад</button>':''}<button class="btn main" id="next">${label||'Дальше'}</button></div>`}
+
+function render(){
+  bar();app.innerHTML='';
+  if(S.step===0){
+    app.append(h(`<section class="card"><div><div class="qn">Вопрос 1 из 3</div><h2 class="q">Какой формы кухня?</h2></div>
+      <div class="opts" role="group" aria-label="Форма кухни">${Object.entries(SHAPES).map(([k,s])=>`<button class="opt" data-k="${k}" aria-pressed="${S.shape===k}"><svg viewBox="0 0 100 64" fill="currentColor" style="color:var(--accent)" aria-hidden="true"><rect x="4" y="6" width="92" height="54" rx="4" fill="none" stroke="var(--line)" stroke-width="2"/>${ICON[k]}</svg><b>${s.name}</b><small>${s.hint}</small></button>`).join('')}</div>${nav(false,true)}</section>`));
+    app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{S.shape=b.dataset.k;render()});
+  }
+  if(S.step===1){
+    const sh=SHAPES[S.shape],w=S.sizes[S.shape];
+    app.append(h(`<section class="card"><div><div class="qn">Вопрос 2 из 3</div><h2 class="q">Какой длины стены под кухню?</h2></div>
+      <p class="note" style="font-size:14px">Можно примерно — в метрах, по стене от угла до угла. Точно измерим на бесплатном замере.</p>
+      <div class="walls">${sh.walls.map((n,i)=>`<div class="wall"><label for="w${i}">${n}${S.shape==='island'&&i===1?'<small>обычно 1,2–3 м</small>':''}</label><div class="stepper"><button data-i="${i}" data-d="-0.1" aria-label="Меньше">−</button><input id="w${i}" data-i="${i}" inputmode="decimal" value="${m(w[i])}"><button data-i="${i}" data-d="0.1" aria-label="Больше">+</button></div></div>`).join('')}</div>
+      <div class="total" id="tot"></div>${nav(true,true)}</section>`));
+    const tot=()=>{document.getElementById('tot').innerHTML='Всего: <b>'+m(w.reduce((a,b)=>a+b,0))+' погонных метра</b>'};tot();
+    app.querySelectorAll('.stepper button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;w[i]=Math.min(8,Math.max(0.6,Math.round((w[i]+ +b.dataset.d)*10)/10));document.getElementById('w'+i).value=m(w[i]);tot()});
+    app.querySelectorAll('.stepper input').forEach(inp=>inp.oninput=()=>{const v=parseFloat(inp.value.replace(',','.'));if(v>=0.6&&v<=8){w[+inp.dataset.i]=v;tot()}});
+  }
+  if(S.step===2){
+    app.append(h(`<section class="card"><div><div class="qn">Вопрос 3 из 3</div><h2 class="q">Какой высоты нужна кухня?</h2></div>
+      <div class="opts tiers" role="group" aria-label="Высота кухни">${Object.entries(HEIGHTS).map(([k,t])=>`<button class="opt tier" data-k="${k}" aria-pressed="${S.height===k}"><svg class="hico" viewBox="0 0 40 48" aria-hidden="true"><rect x="2" y="2" width="36" height="44" fill="none" stroke="var(--line)" stroke-width="2"/><rect x="6" y="${k==='std'?14:k==='high'?10:4}" width="28" height="${k==='std'?10:k==='high'?14:20}" fill="var(--accent)"/><rect x="6" y="30" width="28" height="14" fill="var(--oak)"/></svg><span><b>${t.name}</b> <span class="hh">· ${t.h}</span><br><small>${t.desc}</small></span></button>`).join('')}</div>
+      ${nav(true,true,'Показать цену')}</section>`));
+    app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{S.height=b.dataset.k;app.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  }
+  if(S.step===3){
+    const c=calc(),H=HEIGHTS[S.height],sh=SHAPES[S.shape],w=S.sizes[S.shape];
+    const promo=new Date()<=PROMO_END;
+    const d=x=>Math.round(x*0.85/1000)*1000;
+    const sizes=w.map(m).join(' + ')+' м';
+    const L=S.lead;
+    app.append(h(`<section class="card" aria-live="polite">
+      <div><div class="res-label">Примерная цена вашей кухни</div><div class="price">${fmt(c.low)} – ${fmt(c.high)} ₽</div><div class="sub">это ${fmt(c.perLow)}–${fmt(c.perHigh)} ₽ за погонный метр</div></div>
+      ${promo?`<div class="deal"><div class="res-label" style="color:var(--oak)">${PROMO_LABEL}</div><div class="price">${fmt(d(c.low))} – ${fmt(d(c.high))} ₽</div><div class="note">Скидка на модульные кухни и все допы к ним${OCT?'':'. В ноябре сверху ещё колесо фортуны — от 3 до 10%'}. Не суммируется с рассрочкой.</div></div>`:''}
+      <dl class="sum"><dt>Форма</dt><dd>${sh.name}</dd><dt>Размеры</dt><dd>${sizes} · ${m(c.L)} п.м.</dd><dt>Высота</dt><dd>${H.name}, ${H.h}</dd></dl>
+      <div class="ex"><h3>Похожие кухни, которые мы сделали в 2026 году</h3><ul>${examples().map(e=>`<li>${e.n} — ${fmt(e.p)} ₽</li>`).join('')}</ul></div>
+      <p class="note">Цена примерная, по последним проектам «Народной мебели». Точная стоимость зависит от фасадов, столешницы и начинки — назовём её после бесплатного замера, до оплаты.</p>
+      <button class="btn" id="back">Изменить ответы</button>
+    </section>
+    <section class="card lead" id="lead">
+      <div><div class="res-label" style="color:var(--oak)">Бесплатно</div><h2 class="q">Запишитесь на замер</h2><p class="note" style="font-size:15px">Замерщик приедет в удобное время, а дизайнер сделает проект кухни. Вы увидите точную цену до оплаты — ни к чему не обязывает.</p></div>
+      <form id="lf" novalidate>
+        <div class="fld"><label for="ln">Ваше имя</label><input id="ln" autocomplete="given-name" value=""></div>
+        <div class="fld"><label for="lp">Телефон</label><input id="lp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value=""><span class="err" id="lpe" hidden>Проверьте номер: нужно 10 цифр после +7</span></div>
+        <div class="fld"><label for="lc">Город</label><select id="lc"><option>Набережные Челны</option><option>Нижнекамск</option><option>Другой город рядом</option></select></div>
+        <div class="fld"><label for="lt">Когда удобно на замер <span class="opt-l">— необязательно</span></label><input id="lt" placeholder="например, в субботу после 12" value=""></div>
+        <label class="toggle" for="lok"><input type="checkbox" id="lok"><span><small style="color:var(--ink)">Согласен(на) на обработку персональных данных для связи по заявке</small></span></label>
+        <button class="btn main" id="ls" type="submit">Отправить заявку на замер</button>
+      </form>
+      <div id="done" hidden></div>
+    </section>`));
+    const f=id=>document.getElementById(id);
+    f('ln').value=L.name;f('lp').value=L.phone;f('lc').value=L.city;f('lt').value=L.time;f('lok').checked=L.ok;
+    const sync=()=>{L.name=f('ln').value.trim();L.phone=f('lp').value.trim();L.city=f('lc').value;L.time=f('lt').value.trim();L.ok=f('lok').checked;
+      const digits=L.phone.replace(/\D/g,'');f('ls').disabled=!(L.ok&&L.name&&digits.length>=10)};
+    ['ln','lp','lc','lt','lok'].forEach(id=>f(id).addEventListener('input',sync));f('lok').addEventListener('change',sync);sync();
+    f('lf').onsubmit=e=>{e.preventDefault();sync();
+      let dg=L.phone.replace(/\D/g,'');if(dg.length===11&&(dg[0]==='8'||dg[0]==='7'))dg=dg.slice(1);
+      if(dg.length!==10){f('lpe').hidden=false;f('lp').focus();return}
+      f('lpe').hidden=true;
+      const ph='+7 '+dg.slice(0,3)+' '+dg.slice(3,6)+'-'+dg.slice(6,8)+'-'+dg.slice(8);
+      const txt=`Заявка на бесплатный замер кухни\nИмя: ${L.name}\nТелефон: ${ph}\nГород: ${L.city}${L.time?`\nКогда удобно: ${L.time}`:''}\n\nРасчёт из калькулятора: ${sh.name.toLowerCase()} кухня, ${sizes} (${m(c.L)} п.м.), высота: ${H.name.toLowerCase()}.\nПримерная цена: ${fmt(c.low)}–${fmt(c.high)} ₽${promo?`, со скидкой 15%: ${fmt(d(c.low))}–${fmt(d(c.high))} ₽`:''}.\nИсточник: калькулятор кухни${SRC==='vk'?', ВКонтакте':SRC==='avito'?', Авито':''}.`;
+      const url=VK_GROUP?'https://vk.me/'+VK_GROUP:'';
+      f('lf').hidden=true;const dn=f('done');dn.hidden=false;
+      dn.innerHTML=`<div class="steps2"><p><b>Остался последний шаг.</b> Мы скопировали вашу заявку — отправьте её нам в сообщения сообщества ВКонтакте, и менеджер перезвонит, чтобы согласовать время замера.</p>
+        <ol><li>${url?'Нажмите «Открыть сообщения ВКонтакте».':'Откройте наше сообщество ВКонтакте и нажмите «Написать сообщение».'}</li><li>Вставьте текст заявки и нажмите «Отправить».</li></ol></div>
+        <pre class="copybox" id="cb"></pre>
+        <p class="note" style="margin-top:10px">Удобнее по телефону или в MAX? <b style="color:var(--ink);white-space:nowrap">8 967 372 90 76</b> — назовите размеры кухни, и мы запишем на замер.</p>
+        <div class="nav">${url?`<a class="btn main" id="vk" href="${url}" target="_blank" rel="noopener">Открыть сообщения ВКонтакте</a>`:''}<button class="btn${url?'':' main'}" id="cp" type="button">Скопировать заявку</button></div>`;
+      f('cb').textContent=txt;
+      const cp=f('cp');
+      const copy=()=>{const ok=()=>{cp.textContent='Скопировано'};
+        const fb=()=>{const r=document.createRange();r.selectNodeContents(f('cb'));const s=getSelection();s.removeAllRanges();s.addRange(r);let k=false;try{k=document.execCommand('copy')}catch(e){}cp.textContent=k?'Скопировано':'Текст выделен — скопируйте его'};
+        if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,fb);else fb()};
+      cp.onclick=copy;copy();if(f('vk'))f('vk').addEventListener('click',copy);
+    };
+    f('back').onclick=()=>{S.step=0;render();window.scrollTo({top:0})};
+    return;
+  }
+  const b=document.getElementById('back');if(b)b.onclick=()=>{S.step--;render()};
+  document.getElementById('next').onclick=()=>{S.step++;render();window.scrollTo({top:0})};
+}
+render();
+</script>
+
+</html>
