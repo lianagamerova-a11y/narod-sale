@@ -7,39 +7,42 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout: one narrow column, a 3-step questionnaire on a "worktop" card, result card at the end */
+/* Layout: brand-book look of «Народная мебель» — white header with lime rule, grey ground, white question cards, lime pill buttons with ink outline. Single light look, as in the brand guide. */
 :root{
-  --bg:#eef0ec; --surface:#ffffff; --ink:#1d2622; --muted:#5f6b65; --line:#d6dbd5;
-  --accent:#2f5d50; --accent-ink:#ffffff; --accent-soft:#dfe9e4; --oak:#a8773d; --oak-soft:#f3e8d9;
-  --display:"Unbounded","Arial Black",system-ui,sans-serif;
-  --sans:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --orange:#F28F4F; --amber:#F9B233; --yellow:#FFEC7F; --lime:#A2C433; --green:#418940;
+  --bg:#F2F2F0; --surface:#FFFFFF; --ink:#1E1E1C; --muted:#5b5b57; --line:#dcdcd5;
+  --accent:#418940; --accent-ink:#1E1E1C; --accent-soft:#eef5dc; --oak:#c25a17; --oak-soft:#fff6cc;
+  --display:"Montserrat",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#121715; --surface:#1b2220; --ink:#e7ece9; --muted:#9aa7a1; --line:#2c3632;
-  --accent:#6fbfa4; --accent-ink:#0c1a15; --accent-soft:#1d322b; --oak:#d6a466; --oak-soft:#2e2619; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#121715; --surface:#1b2220; --ink:#e7ece9; --muted:#9aa7a1; --line:#2c3632;
-  --accent:#6fbfa4; --accent-ink:#0c1a15; --accent-soft:#1d322b; --oak:#d6a466; --oak-soft:#2e2619; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;padding-block:0 48px}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{background:var(--surface);border-bottom:2px solid var(--lime)}
+.bar .in{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.bar img{height:30px;width:auto;display:block}
+.pill{font-weight:600;font-size:13px;background:var(--lime);padding:7px 13px;border-radius:999px;white-space:nowrap}
+@media(max-width:420px){.bar img{height:22px}.pill{font-size:12px;padding:6px 10px}}
 .wrap{max-width:640px;margin:0 auto}
 header{padding-block:32px 20px;display:flex;flex-direction:column;gap:8px}
-.brand{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--oak);font-weight:600}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,6vw,34px);line-height:1.15;margin:0;text-wrap:balance}
+.brand{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700}
+h1{font-family:var(--display);font-weight:800;letter-spacing:-.01em;font-size:clamp(26px,6.4vw,38px);line-height:1.05;margin:0;text-wrap:balance}
+h1 mark{background:linear-gradient(transparent 58%,var(--yellow) 58%);color:inherit;padding:0 .06em}
 .intro{color:var(--muted);margin:0;max-width:52ch}
 .steps{display:flex;gap:6px;margin-bottom:12px}
 .steps span{flex:1;height:5px;border-radius:3px;background:var(--line)}
-.steps span.on{background:var(--accent)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:18px}
-.q{font-family:var(--display);font-weight:500;font-size:19px;line-height:1.3;margin:0;text-wrap:balance}
+.steps span.on{background:var(--lime)}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:18px}
+.q{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.3;margin:0;text-wrap:balance}
 .qn{font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.04em}
 .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .opt{font:inherit;color:var(--ink);text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0}
-.opt:hover{border-color:var(--accent)}
-.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt:hover{border-color:var(--ink)}
+.opt[aria-pressed="true"]{border:2px solid var(--ink);background:var(--accent-soft);box-shadow:0 3px 0 var(--ink)}
 .opt svg{width:100%;height:64px}
 .opt b{font-weight:600}
 .opt small{color:var(--muted);font-size:13px;line-height:1.4}
@@ -50,24 +53,25 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(24px,6vw,34px);lin
 .wall{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .wall label{font-weight:500}
 .wall small{display:block;color:var(--muted);font-size:13px;font-weight:400}
-.stepper{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
-.stepper button{font:inherit;font-size:20px;width:44px;height:44px;border:0;background:var(--surface);color:var(--accent);cursor:pointer}
+.stepper{display:flex;align-items:center;border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+.stepper button{font:inherit;font-size:20px;font-weight:700;width:44px;height:44px;border:0;background:var(--lime);color:var(--ink);cursor:pointer}
 .stepper input{font:inherit;font-size:17px;font-weight:600;width:72px;height:44px;border:0;border-inline:1px solid var(--line);text-align:center;background:var(--surface);color:var(--ink);font-variant-numeric:tabular-nums}
-.total{background:var(--oak-soft);border-radius:10px;padding:10px 14px;font-size:15px}
+.total{background:var(--oak-soft);border:1.5px dashed var(--ink);border-radius:10px;padding:10px 14px;font-size:15px}
 .total b{font-variant-numeric:tabular-nums}
 .toggle{display:flex;align-items:flex-start;gap:12px;cursor:pointer;border:1.5px solid var(--line);border-radius:12px;padding:12px}
 .toggle input{width:22px;height:22px;accent-color:var(--accent);margin:2px 0 0;flex:0 0 auto}
 .toggle small{display:block;color:var(--muted);font-size:13px}
 .nav{display:flex;gap:10px;justify-content:space-between}
-.btn{font:inherit;font-weight:600;font-size:16px;border-radius:12px;padding:13px 20px;cursor:pointer;border:1.5px solid var(--accent);background:transparent;color:var(--accent)}
-.btn.main{background:var(--accent);color:var(--accent-ink);flex:1}
+.btn{font:inherit;font-weight:700;font-size:15px;border-radius:999px;padding:13px 20px;cursor:pointer;border:2.5px solid var(--ink);background:var(--surface);color:var(--ink)}
+.btn.main{background:var(--lime);color:var(--ink);flex:1;font-weight:800;text-transform:uppercase;letter-spacing:.03em;box-shadow:0 4px 0 var(--ink)}
+.btn.main:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
 .btn[hidden]{display:none}
-button:focus-visible,input:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 .res-label{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.price{font-family:var(--display);font-weight:700;font-size:clamp(26px,7.5vw,38px);line-height:1.1;font-variant-numeric:tabular-nums;color:var(--accent)}
+.price{font-family:var(--display);font-weight:800;font-size:clamp(26px,7.5vw,38px);line-height:1.1;font-variant-numeric:tabular-nums;color:var(--accent)}
 .sub{color:var(--muted);font-size:15px}
-.deal{background:var(--oak-soft);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px}
-.deal .price{font-size:clamp(22px,6vw,30px);color:var(--oak)}
+.deal{background:var(--oak-soft);border:2px dashed var(--ink);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:2px}
+.deal .price{font-size:clamp(22px,6vw,30px);color:var(--ink)}
 .old{text-decoration:line-through;color:var(--muted);font-size:15px;font-variant-numeric:tabular-nums}
 .sum{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:15px}
 .sum dt{color:var(--muted)} .sum dd{margin:0;font-weight:500}
@@ -78,13 +82,13 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--oak);outline-of
 .note{font-size:13px;color:var(--muted);margin:0}
 .hico{flex:0 0 40px;width:40px;height:48px}
 .hh{color:var(--muted);font-weight:400}
-.lead{border-color:var(--oak);margin-top:14px}
+.lead{border:2.5px solid var(--ink);margin-top:14px;box-shadow:0 8px 0 rgba(30,30,28,.12)}
 #lf{display:flex;flex-direction:column;gap:14px}
 .fld{display:flex;flex-direction:column;gap:6px}
 .fld label{font-weight:500;font-size:15px}
 .opt-l{color:var(--muted);font-weight:400}
-.fld input,.fld select{font:inherit;font-size:16px;padding:12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);width:100%}
-.fld input:focus,.fld select:focus{border-color:var(--accent);outline:none}
+.fld input,.fld select{font:inherit;font-size:16px;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);width:100%}
+.fld input:focus,.fld select:focus{border-color:var(--lime);box-shadow:0 0 0 4px rgba(162,196,51,.25);outline:none}
 .err{color:#b3261e;font-size:13px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 a.btn{text-decoration:none;text-align:center}
@@ -94,10 +98,11 @@ a.btn{text-decoration:none;text-align:center}
 @media (prefers-reduced-motion:no-preference){.card{animation:in .25s ease-out}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
 </style>
 
-<div class="wrap">
+<div class="bar"><div class="in gutter"><img src="../logo0.png" alt="Народная мебель"><span class="pill">Кухни на заказ</span></div></div>
+<div class="wrap gutter">
 <header>
-  <div class="brand">Народная мебель · кухни на заказ</div>
-  <h1>Сколько будет стоить ваша кухня</h1>
+  <div class="brand">Калькулятор кухни</div>
+  <h1>Сколько будет стоить <mark>ваша кухня</mark></h1>
   <p class="intro">Ответьте на 3 вопроса — покажем примерную цену по нашим последним кухням и запишем на бесплатный замер. Набережные Челны и Нижнекамск.</p>
 </header>
 <div class="steps" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
