@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Распродажа Народной мебели: −25% на 49 моделей из наличия. Набережные Челны, Нижнекамск, Елабуга.">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Распродажа ТБД −25%</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: brand-book spread — white header with lime rule, grey copy panel + brand pattern hero, sticky room filter, product grid. Single light look, as in the brand guide. */
+:root{
+  --orange:#F28F4F; --amber:#F9B233; --yellow:#FFEC7F; --lime:#A2C433; --green:#418940;
+  --ink:#1E1E1C; --panel:#F2F2F0; --paper:#FFFFFF; --muted:#5b5b57; --line:#e3e3dd;
+  --font:"Montserrat",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--font);font-size:15px;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto}
+.bar{border-bottom:2px solid var(--lime);background:var(--paper)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
+.bar img{height:34px;width:auto;display:block}
+.pill{font-weight:600;font-size:14px;background:var(--lime);padding:8px 16px;border-radius:999px;white-space:nowrap}
+@media(max-width:520px){.bar img{height:24px}.pill{font-size:12px;padding:6px 11px}}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.hero .copy{background:var(--panel);display:flex;justify-content:flex-end}
+.hero .copy .in{width:100%;max-width:640px;padding-block:48px;display:flex;flex-direction:column;gap:18px}
+.eyebrow{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+h1{margin:0;font-weight:800;font-size:clamp(30px,4.4vw,50px);line-height:1;letter-spacing:-.01em;text-wrap:balance}
+h1 mark{background:linear-gradient(transparent 58%,var(--yellow) 58%);color:inherit;padding:0 .06em}
+.lead{margin:0;font-size:16px;line-height:1.55;color:var(--muted);max-width:46ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.facts li{font-size:13px;font-weight:600;background:var(--paper);border-radius:999px;padding:7px 12px;display:flex;gap:7px;align-items:center}
+.facts li::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+.art{position:relative;overflow:hidden;min-height:300px;display:grid;place-items:center}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.stamp{position:relative;z-index:1;width:min(64%,300px);aspect-ratio:1;border-radius:50%;background:var(--paper);border:5px solid var(--ink);box-shadow:0 14px 0 rgba(30,30,28,.14);display:grid;place-items:center;text-align:center;transform:rotate(-8deg)}
+.stamp b{display:block;font-weight:800;font-size:clamp(46px,7vw,86px);line-height:.9;letter-spacing:-.04em}
+.stamp span{display:block;font-weight:700;font-size:clamp(12px,1.4vw,15px);letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.art{order:-1;min-height:240px;padding-block:28px}.hero .copy{justify-content:center}.hero .copy .in{padding-block:30px 36px}}
+
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.tools .wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-block:12px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.chips::-webkit-scrollbar{display:none}
+.chip{font:600 14px var(--font);color:var(--ink);background:var(--panel);border:2px solid transparent;border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.chip small{font-weight:500;color:var(--muted);margin-left:4px}
+.chip[aria-pressed="true"]{background:var(--lime);border-color:var(--ink)}
+.chip:focus-visible,.sort select:focus-visible,.btn:focus-visible,.nav:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.sort select{font:600 14px var(--font);color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:12px;padding:8px 10px}
+
+main .wrap{padding-block:28px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;background:var(--paper);border:1.5px solid var(--line);border-radius:22px;overflow:hidden;min-width:0}
+.ph{position:relative;aspect-ratio:4/3;background:#fff;overflow:hidden}
+.ph img{width:100%;height:100%;display:block;object-fit:cover}
+.ph img.cut{object-fit:contain;padding:14px;box-sizing:border-box}
+.badge{position:absolute;left:12px;top:12px;background:var(--orange);color:var(--ink);font-weight:800;font-size:15px;padding:6px 11px;border-radius:12px;border:2px solid var(--ink)}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:rgba(255,255,255,.92);cursor:pointer;font:800 16px var(--font);display:grid;place-items:center;color:var(--ink)}
+.nav.prev{left:10px}.nav.next{right:10px}
+.dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(30,30,28,.28)}
+.dots i.on{background:var(--ink)}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.type{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+.card h3{margin:0;font-size:17px;font-weight:700;line-height:1.25;text-wrap:balance}
+.spec{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
+.price{margin-top:auto;padding-top:10px;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;font-variant-numeric:tabular-nums}
+.price .new{font-size:26px;font-weight:800;color:var(--green)}
+.price .old{font-size:15px;font-weight:600;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--orange);text-decoration-thickness:2px}
+.save{font-size:12px;font-weight:700;background:var(--yellow);padding:3px 8px;border-radius:8px;align-self:flex-start;font-variant-numeric:tabular-nums}
+.btn{font:800 14px/1 var(--font);letter-spacing:.03em;text-transform:uppercase;color:var(--ink);background:var(--lime);border:2.5px solid var(--ink);border-radius:999px;padding:13px 16px;cursor:pointer;box-shadow:0 4px 0 var(--ink);margin-top:8px}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.code{font-size:12px;color:var(--muted)}
+
+.contact{background:var(--panel)}
+.contact .wrap{padding-block:36px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start}
+.contact h2{margin:0 0 10px;font-size:26px;font-weight:800;text-wrap:balance}
+.contact p{margin:0 0 8px;line-height:1.55;color:var(--muted);max-width:56ch}
+.phone{display:flex;gap:8px;align-items:stretch;background:var(--paper);border:2.5px solid var(--ink);border-radius:16px;padding:8px;max-width:420px}
+.phone b{flex:1;display:grid;place-items:center;font-size:22px;font-weight:800;user-select:all;font-variant-numeric:tabular-nums;white-space:nowrap}
+.phone button{border:0;border-radius:12px;padding:0 16px;font:700 14px var(--font);background:var(--green);color:#fff;cursor:pointer}
+.cities{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding:0;list-style:none}
+.cities li{font-size:13px;font-weight:600;background:var(--paper);border-radius:999px;padding:7px 12px}
+@media(max-width:760px){.contact .wrap{grid-template-columns:1fr}}
+.fine{font-size:12px;color:var(--muted);padding-block:16px 28px}
+
+.modal[hidden]{display:none}
+.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(30,30,28,.55);padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet{width:min(440px,100%);background:var(--paper);border:3px solid var(--ink);border-radius:26px;padding:26px 22px 22px;display:flex;flex-direction:column;gap:12px;text-align:center}
+.sheet h2{margin:0;font-size:22px;font-weight:800;text-wrap:balance}
+.sheet p{margin:0;font-size:14px;line-height:1.5;color:var(--muted)}
+.msg{background:#fffbe0;border:2px dashed var(--ink);border-radius:14px;padding:12px;font-size:14px;line-height:1.45;text-align:left;user-select:all}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row button{flex:1;min-width:140px}
+.ghost{background:var(--paper)!important}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0}
+@media (prefers-reduced-motion:reduce){.btn:active{transform:none}}
+</style>
+</head><body>
+
+
+<header class="bar"><div class="wrap gutter"><img src="logo0.png" alt="Народная мебель"><span class="pill">Акция ТБД · −25%</span></div></header>
+
+<section class="hero">
+  <div class="copy gutter"><div class="in">
+    <span class="eyebrow">Распродажа мебели из наличия</span>
+    <h1>Минус 25% на&nbsp;<mark>49 моделей</mark> со склада</h1>
+    <p class="lead">Кровати, шкафы, стенки и детская мебель. Всё уже на складе: забрать можно сразу, привезём и соберём. Количество каждой модели ограничено.</p>
+    <ul class="facts">
+      <li style="--c:var(--orange)">Скидка 25% на всё</li>
+      <li style="--c:var(--lime)">В наличии</li>
+      <li style="--c:var(--green)" id="maxSave">Выгода до 13 580 ₽</li>
+    </ul>
+  </div></div>
+  <div class="art" aria-hidden="true">
+    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+      <defs><clipPath id="bc"><polygon points="430,-20 560,-20 860,620 170,620"/></clipPath></defs>
+      <rect width="800" height="600" fill="#FFFFFF"/>
+      <polygon points="-10,-20 430,-20 170,620 -10,620" fill="#A2C433"/>
+      <polygon points="430,-20 560,-20 860,620 170,620" fill="#FFEC7F"/>
+      <rect x="580" y="360" width="300" height="320" rx="70" fill="#418940"/>
+      <rect x="580" y="360" width="300" height="320" rx="70" fill="#A2C433" clip-path="url(#bc)"/>
+      <circle cx="210" cy="660" r="230" fill="#F28F4F"/>
+      <circle cx="210" cy="660" r="230" fill="#F9B233" clip-path="url(#bc)"/>
+    </svg>
+    <div class="stamp"><div><b>−25%</b><span>на всё по акции</span></div></div>
+  </div>
+</section>
+
+<nav class="tools" aria-label="Фильтр"><div class="wrap gutter">
+  <div class="chips" id="chips" role="group" aria-label="Комната"></div>
+  <label class="sort"><select id="sort" aria-label="Сортировка">
+    <option value="def">Сначала спальни</option><option value="asc">Сначала дешевле</option><option value="desc">Сначала дороже</option><option value="save">Самая большая выгода</option>
+  </select></label>
+</div></nav>
+
+<main><div class="wrap gutter"><div class="grid" id="grid"></div></div></main>
+
+<section class="contact" id="contact"><div class="wrap gutter">
+  <div>
+    <h2>Как купить по акции</h2>
+    <p>Напишите или позвоните нам и назовите номер модели из каталога. Отложим товар, подскажем по размерам и доставке. Можно приехать в салон и посмотреть вживую.</p>
+    <p>Доставка, подъём и сборка. Есть рассрочка.</p>
+    <ul class="cities"><li>Набережные Челны</li><li>Нижнекамск</li><li>Елабуга</li></ul>
+  </div>
+  <div>
+    <p><b style="color:var(--ink)">Телефон и MAX</b></p>
+    <div class="phone"><b id="ph">8 967 372-90-76</b><button type="button" id="copyPh">Скопировать</button></div>
+  </div>
+</div></section>
+<p class="fine wrap gutter">Старая цена — розничная цена до акции. Цена по акции — со скидкой 25%, округлена до 10 ₽. Количество товара ограничено, наличие уточняйте у менеджера. Фото в интерьере — визуализация, оттенок может немного отличаться.</p>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="sheet">
+    <h2 id="mTitle">Отложим для вас</h2>
+    <p>Скопируйте сообщение и отправьте нам в MAX или назовите номер модели по телефону <b style="color:var(--ink)">8 967 372-90-76</b>.</p>
+    <div class="msg" id="mMsg"></div>
+    <div class="row"><button class="btn" id="mCopy" type="button">Скопировать</button><button class="btn ghost" id="mClose" type="button">Закрыть</button></div>
+  </div>
+</div>
+
+<script>
+const ITEMS=[{"n": 1, "name": "Двуспальная кровать «Серия 3» 160×200", "room": "bed", "type": "Кровати", "size": "спальное место 160 × 200 см", "color": "дуб Делано / дуб Венге", "feat": ["изголовье с декоративной вставкой", "основание под матрас 160 × 200"], "old": 15500, "new": 11620, "photos": ["int/04.jpg", "img/01.jpg"]}, {"n": 2, "name": "Двуспальная кровать «Серия 2» с мягким изголовьем 140×200", "room": "bed", "type": "Кровати", "size": "спальное место 140 × 200 см", "color": "белый / серая ткань «Квадро»", "feat": ["мягкое стёганое изголовье", "осталась 1 штука"], "old": 32800, "new": 24600, "photos": ["int/02.jpg", "img/02.jpg"]}, {"n": 3, "name": "Кровать «Даллас» 180×200", "room": "bed", "type": "Кровати", "size": "1870 × 990 × 2090 мм, спальное место 180 × 200 см", "color": "фасад МДФ софт графит / корпус дуб каньон", "feat": ["матовые фасады МДФ софт-тач в изголовье и изножье", "современный дизайн"], "old": 24800, "new": 18600, "photos": ["int/05.jpg", "img/03.jpg"]}, {"n": 4, "name": "Кровать «Даллас» 160×200", "room": "bed", "type": "Кровати", "size": "спальное место 160 × 200 см", "color": "фасад МДФ софт графит / корпус дуб каньон", "feat": ["матовые фасады МДФ софт-тач", "пара к кровати 180 — та же серия"], "old": 23900, "new": 17920, "photos": ["int/05.jpg", "img/04.jpg"]}, {"n": 5, "name": "Односпальная кровать «Киви» 90×190", "room": "bed", "type": "Кровати", "size": "1932 × 750 × 934 мм, спальное место 90 × 190 см", "color": "дуб Делано", "feat": ["для подростка, гостевой комнаты или дачи"], "old": 7500, "new": 5620, "photos": ["int/00.jpg", "img/05.jpg"]}, {"n": 6, "name": "Шкаф 3-створчатый «Александрина» с зеркалом", "room": "bed", "type": "Шкафы", "size": "1350 × 2116 × 540 мм", "color": "ясень", "feat": ["зеркало на центральной двери", "классический стиль с филёнками"], "old": 26900, "new": 20180, "photos": ["int/28.jpg", "img/06.jpg"]}, {"n": 7, "name": "Шкаф «Нельсон» с ящиками", "room": "bed", "type": "Шкафы", "size": "1200 × 2200 × 500 мм", "color": "фасад железный камень / корпус дуб каньон", "feat": ["распашные двери и выдвижные ящики", "сочетание тёмного камня и дерева"], "old": 24500, "new": 18380, "photos": ["int/16.jpg", "img/07.jpg"]}, {"n": 8, "name": "Шкаф 4-дверный «Афина Nova» с зеркалами", "room": "bed", "type": "Шкафы", "size": "1808 × 2212 × 626 мм", "color": "капучино / золото", "feat": ["две зеркальные двери", "золотые ручки"], "old": 46900, "new": 35180, "photos": ["img/08.jpg"]}, {"n": 9, "name": "Кровать «Афина Nova» 160×200 с мягким изголовьем", "room": "bed", "type": "Кровати", "size": "спальное место 160 × 200 см", "color": "капучино / золото", "feat": ["высокое мягкое изголовье", "ламели в комплекте", "золотые ножки"], "old": 29200, "new": 21900, "photos": ["int/06.jpg", "img/09.jpg"]}, {"n": 10, "name": "Зеркало «Афина Nova»", "room": "bed", "type": "Зеркала", "size": "к комоду спальни «Афина Nova»", "color": "капучино / золото", "feat": ["вертикальное зеркало с декоративной планкой"], "old": 7950, "new": 5960, "photos": ["img/10.jpg"]}, {"n": 11, "name": "Шкаф 5-дверный «Белла Nova» с зеркалами", "room": "bed", "type": "Шкафы", "size": "2248 × 2246 × 626 мм", "color": "белый / золото", "feat": ["зеркальные двери с декоративной раскладкой", "классический стиль"], "old": 54300, "new": 40720, "photos": ["int/01.jpg", "int/07.jpg", "int/36.jpg", "img/11.jpg"]}, {"n": 12, "name": "Шкаф 4-дверный «Белла Nova» с зеркалами", "room": "bed", "type": "Шкафы", "size": "1808 × 2212 × 626 мм", "color": "белый / золото", "feat": ["зеркальные двери с декоративной раскладкой", "классический стиль"], "old": 44500, "new": 33380, "photos": ["int/26.jpg", "img/12.jpg"]}, {"n": 13, "name": "Прикроватная тумба «Белла Nova»", "room": "bed", "type": "Тумбы", "size": "460 × 530 × 440 мм", "color": "белый / золото", "feat": ["ящик и дверца", "классический стиль"], "old": 4900, "new": 3680, "photos": ["img/13.jpg"]}, {"n": 14, "name": "Кровать «Белла Nova» 160×200", "room": "bed", "type": "Кровати", "size": "спальное место 160 × 200 см", "color": "белый / золото", "feat": ["резное изголовье в классическом стиле", "ламели в комплекте"], "old": 28600, "new": 21450, "photos": ["int/11.jpg", "img/14.jpg"]}, {"n": 15, "name": "Зеркало «Белла Nova»", "room": "bed", "type": "Зеркала", "size": "к комоду спальни «Белла Nova»", "color": "белый / золото", "feat": ["классическая рама с декором"], "old": 4200, "new": 3150, "photos": ["img/15.jpg"]}, {"n": 16, "name": "Шкаф 2-створчатый «МСП 1» с зеркалом", "room": "bed", "type": "Шкафы", "size": "701 × 2094 × 500 мм", "color": "венге / анкор светлый", "feat": ["узкий — встанет даже в небольшую спальню или прихожую", "зеркало на двери"], "old": 9300, "new": 6980, "photos": ["int/35.jpg", "img/16.jpg"]}, {"n": 17, "name": "Комод «МСП 1» на 3 ящика", "room": "bed", "type": "Комоды", "size": "901 × 724 × 390 мм", "color": "венге / анкор", "feat": ["три вместительных ящика"], "old": 6500, "new": 4880, "photos": ["img/17.jpg"]}, {"n": 18, "name": "Прикроватная тумба «МСП 1»", "room": "bed", "type": "Тумбы", "size": "501 × 414 × 358 мм", "color": "венге / анкор светлый", "feat": ["ящик и открытая полка"], "old": 2500, "new": 1880, "photos": ["img/18.jpg"]}, {"n": 19, "name": "Двуспальная кровать «МСП 1» 160×200", "room": "bed", "type": "Кровати", "size": "спальное место 160 × 200 см", "color": "венге / анкор", "feat": ["классическая кровать для спальни"], "old": 7300, "new": 5480, "photos": ["int/29.jpg", "img/19.jpg"]}, {"n": 20, "name": "Комод «Невио-1» с дверцей и 4 ящиками", "room": "living", "type": "Комоды", "size": "1350 × 450 × 970 мм", "color": "дуб крафт золотой / белый", "feat": ["4 ящика и отделение с дверцей", "широкий — 135 см"], "old": 12900, "new": 9680, "photos": ["int/22.jpg", "int/34.jpg", "img/20.jpg"]}, {"n": 21, "name": "Стенка «Сафари» для гостиной", "room": "living", "type": "Стенки", "size": "3000 × 2000 × 510 мм", "color": "корпус дуб крафт золотой, фасады МДФ матовый графит софт", "feat": ["комплект: шкафы, витрина, полки, место под ТВ", "матовые фасады МДФ"], "old": 35800, "new": 26850, "photos": ["int/13.jpg", "img/21.jpg"]}, {"n": 22, "name": "Стенка «Марта» для гостиной", "room": "living", "type": "Стенки", "size": "2700 × 2124 × 468 мм", "color": "анкор", "feat": ["шкафы, витрина, полки и ниша под ТВ", "ниша под телевизор 936 × 812 мм"], "old": 29000, "new": 21750, "photos": ["int/38.jpg", "img/22.jpg"]}, {"n": 23, "name": "Стенка «Валенсия» с местом под ТВ, венге", "room": "living", "type": "Стенки", "size": "2000 × 1895 × 574 мм", "color": "венге", "feat": ["фасады с узором", "ниша под телевизор"], "old": 28100, "new": 21080, "photos": ["int/20.jpg", "img/23.jpg"]}, {"n": 24, "name": "Стенка «Валенсия» с местом под ТВ, светлая", "room": "living", "type": "Стенки", "size": "2000 × 1895 × 574 мм", "color": "туя светлая", "feat": ["фасады с узором", "ниша под телевизор"], "old": 28100, "new": 21080, "photos": ["img/24.jpg"]}, {"n": 25, "name": "Стенка-горка «Ультра №1»", "room": "living", "type": "Стенки", "size": "2100 × 450 × 1970 мм", "color": "шимо светлый", "feat": ["шкафы, антресоли и ниша под ТВ", "неглубокая — 45 см"], "old": 32100, "new": 24080, "photos": ["img/25.jpg"]}, {"n": 26, "name": "Полка «Лило» 60 см на металлическом каркасе", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "600 × 360 × 298 мм", "color": "пепельная роза", "feat": ["металлический каркас", "подростковая серия «Лило»"], "old": 5500, "new": 4120, "photos": ["img/26.jpg"]}, {"n": 27, "name": "Полка «Лило» 45 см на металлическом каркасе", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "450 × 360 × 298 мм", "color": "пепельная роза", "feat": ["металлический каркас", "подростковая серия «Лило»"], "old": 5300, "new": 3980, "photos": ["img/27.jpg"]}, {"n": 28, "name": "Стеллаж «Лило» 40 см на металлическом каркасе", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "400 × 720 × 298 мм", "color": "пепельная роза", "feat": ["две полки", "подростковая серия «Лило»"], "old": 7400, "new": 5550, "photos": ["img/28.jpg"]}, {"n": 29, "name": "Кровать-софа «Лило» с выдвижным ящиком", "room": "kids", "type": "Кровати", "size": "2052 × 732 × 866 мм", "color": "ясень анкор светлый / белый / пепельная роза", "feat": ["выдвижной ящик под спальным местом", "мягкая спинка-софа"], "old": 18500, "new": 13880, "photos": ["int/08.jpg", "img/29.jpg"]}, {"n": 30, "name": "Тумба «Лило»", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "451 × 611 × 430 мм", "color": "ясень анкор светлый / белый / пепельная роза", "feat": ["два ящика и открытая ниша"], "old": 7700, "new": 5780, "photos": ["img/30.jpg"]}, {"n": 31, "name": "Письменный стол «Бриз №17» 110 см", "room": "kids", "type": "Столы", "size": "1100 × 602 × 767 мм", "color": "дуб эльза / бирюза / белый", "feat": ["тумба с ящиками", "подойдёт школьнику"], "old": 7800, "new": 5850, "photos": ["int/27.jpg", "img/31.jpg"]}, {"n": 32, "name": "Шкаф 2-створчатый «Турбо» с 2 ящиками", "room": "kids", "type": "Шкафы", "size": "900 × 2000 × 497 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["два ящика внизу", "детская серия «Турбо»"], "old": 17200, "new": 12900, "photos": ["int/30.jpg", "img/32.jpg"]}, {"n": 33, "name": "Шкаф 2-створчатый «Турбо»", "room": "kids", "type": "Шкафы", "size": "900 × 2000 × 497 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["детская серия «Турбо»"], "old": 16500, "new": 12380, "photos": ["int/15.jpg", "img/33.jpg"]}, {"n": 34, "name": "Тумба «Турбо» 100 см", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "1000 × 540 × 497 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["ящики и открытые полки", "детская серия «Турбо»"], "old": 6500, "new": 4880, "photos": ["img/34.jpg"]}, {"n": 35, "name": "Тумба «Турбо» с 2 ящиками", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "450 × 541 × 497 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["детская серия «Турбо»"], "old": 4500, "new": 3380, "photos": ["img/35.jpg"]}, {"n": 36, "name": "Письменный стол «Турбо» 120 см", "room": "kids", "type": "Столы", "size": "1200 × 743 × 594 мм", "color": "белый", "feat": ["простой и вместительный", "детская серия «Турбо»"], "old": 3400, "new": 2550, "photos": ["int/21.jpg", "int/25.jpg", "img/36.jpg"]}, {"n": 37, "name": "Письменный стол «Турбо» 120 см с ящиками", "room": "kids", "type": "Столы", "size": "1200 × 743 × 597 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["тумба с двумя ящиками", "детская серия «Турбо»"], "old": 6900, "new": 5180, "photos": ["int/23.jpg", "int/24.jpg", "int/31.jpg", "img/37.jpg"]}, {"n": 38, "name": "Пенал открытый «Турбо» с 2 ящиками", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "450 × 2000 × 497 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["открытые полки и два ящика", "детская серия «Турбо»"], "old": 8600, "new": 6450, "photos": ["img/38.jpg"]}, {"n": 39, "name": "Пенал «Турбо» с дверцей и 2 ящиками", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "450 × 2000 × 497 мм", "color": "фасады МДФ кашемир, терракота, белый / корпус белый", "feat": ["дверца и два ящика", "детская серия «Турбо»"], "old": 11700, "new": 8780, "photos": ["int/32.jpg", "img/39.jpg"]}, {"n": 40, "name": "Навесная полка «Турбо» 120 см, белая", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "1202 × 352 × 318 мм", "color": "белый", "feat": ["детская серия «Турбо»"], "old": 2300, "new": 1720, "photos": ["img/40.jpg"]}, {"n": 41, "name": "Навесная полка «Турбо» 120 см с дверцами", "room": "kids", "type": "Полки, тумбы, пеналы", "size": "1202 × 352 × 318 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["две дверцы и открытая ниша", "детская серия «Турбо»"], "old": 4600, "new": 3450, "photos": ["img/41.jpg"]}, {"n": 42, "name": "Детская кровать «Турбо» с ящиками", "room": "kids", "type": "Кровати", "size": "2032 × 645 × 934 мм", "color": "фасад МДФ терракота / корпус белый", "feat": ["ортопедическое основание", "выдвижные ящики"], "old": 15300, "new": 11480, "photos": ["int/10.jpg", "img/42.jpg"]}, {"n": 43, "name": "Детская кровать «Турбо» с ящиками и настилом", "room": "kids", "type": "Кровати", "size": "2032 × 645 × 934 мм", "color": "фасады МДФ кашемир и терракота / корпус белый", "feat": ["выдвижные ящики под спальным местом", "детская серия «Турбо»"], "old": 14700, "new": 11020, "photos": ["int/10.jpg", "img/43.jpg"]}, {"n": 44, "name": "Комод «Турбо» на 3 ящика", "room": "kids", "type": "Комоды", "size": "750 × 750 × 497 мм", "color": "фасады МДФ кашемир, терракота, белый / корпус белый", "feat": ["три ящика с круглыми ручками", "детская серия «Турбо»"], "old": 8000, "new": 6000, "photos": ["int/14.jpg", "img/44.jpg"]}, {"n": 45, "name": "Тумба под ТВ «Асти» 111 см, белый глянец", "room": "living", "type": "Тумбы под ТВ", "size": "1112 × 560 × 378 мм", "color": "белый глянец / белый", "feat": ["дверца, два ящика и ниша"], "old": 8100, "new": 6080, "photos": ["int/37.jpg", "img/45.jpg"]}, {"n": 46, "name": "Тумба под ТВ «Асти» 167 см, белый глянец", "room": "living", "type": "Тумбы под ТВ", "size": "1668 × 380 × 378 мм", "color": "белый глянец / белый", "feat": ["ящики и открытые ниши", "низкая — для большого телевизора"], "old": 8400, "new": 6300, "photos": ["int/19.jpg", "img/46.jpg"]}, {"n": 47, "name": "Тумба под ТВ «Асти» 111 см, сонома и венге", "room": "living", "type": "Тумбы под ТВ", "size": "1112 × 380 × 378 мм", "color": "дуб сонома / венге", "feat": ["ящики и открытые ниши"], "old": 7200, "new": 5400, "photos": ["int/18.jpg", "img/47.jpg"]}, {"n": 48, "name": "Тумба под ТВ «Асти» 167 см, сонома и венге", "room": "living", "type": "Тумбы под ТВ", "size": "1668 × 380 × 378 мм", "color": "дуб сонома / венге", "feat": ["ящики и открытые ниши", "низкая — для большого телевизора"], "old": 10100, "new": 7580, "photos": ["int/33.jpg", "img/48.jpg"]}, {"n": 49, "name": "Шкаф-купе «Комфорт-12» 150 см, Black Edition", "room": "bed", "type": "Шкафы", "size": "1500 × 2172 × 598 мм", "color": "камень угольный", "feat": ["двери-купе", "тёмный цвет в современном стиле"], "old": 42300, "new": 31720, "photos": ["int/17.jpg", "img/49.jpg"]}];
+const ROOMS=[["all","Все"],["bed","Спальня"],["living","Гостиная"],["kids","Детская"]];
+const fmt=n=>n.toLocaleString('ru-RU').replace(/ /g,' ')+' ₽';
+let room='all', sort='def';
+try{room=localStorage.getItem('tbd_room')||'all';sort=localStorage.getItem('tbd_sort')||'def'}catch(e){}
+const chips=document.getElementById('chips'), grid=document.getElementById('grid'), sel=document.getElementById('sort');
+sel.value=sort;
+document.getElementById('maxSave').textContent='Выгода до '+fmt(Math.max(...ITEMS.map(i=>i.old-i.new)));
+function drawChips(){
+  chips.innerHTML='';
+  ROOMS.forEach(([k,l])=>{
+    const c=k==='all'?ITEMS.length:ITEMS.filter(i=>i.room===k).length;
+    const b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed',room===k);
+    b.innerHTML=l+'<small>'+c+'</small>';b.onclick=()=>{room=k;try{localStorage.setItem('tbd_room',k)}catch(e){};drawChips();draw()};
+    chips.appendChild(b);
+  });
+}
+function card(it){
+  const el=document.createElement('article');el.className='card';
+  let idx=0;const P=it.photos;
+  el.innerHTML=`<div class="ph"><img alt="${it.name}" loading="lazy"><span class="badge">−25%</span>${P.length>1?'<button class="nav prev" type="button" aria-label="Предыдущее фото">‹</button><button class="nav next" type="button" aria-label="Следующее фото">›</button><div class="dots">'+P.map(()=>'<i></i>').join('')+'</div>':''}</div>
+  <div class="body"><span class="type">${it.type}</span><h3>${it.name}</h3>
+  <p class="spec">Цвет: ${it.color}<br>Размер: ${it.size}</p>
+  <div class="price"><span class="new">${fmt(it.new)}</span><span class="old">${fmt(it.old)}</span></div>
+  <span class="save">Выгода ${fmt(it.old-it.new)}</span>
+  <button class="btn" type="button">Отложить для меня</button><span class="code">Модель №${it.n}</span></div>`;
+  const img=el.querySelector('img'), dots=el.querySelectorAll('.dots i');
+  const show=()=>{img.src=P[idx];img.className=P[idx].startsWith('img/')?'cut':'';dots.forEach((d,j)=>d.classList.toggle('on',j===idx))};
+  show();
+  if(P.length>1){el.querySelector('.prev').onclick=()=>{idx=(idx+P.length-1)%P.length;show()};el.querySelector('.next').onclick=()=>{idx=(idx+1)%P.length;show()};}
+  el.querySelector('.btn').onclick=()=>openM(it);
+  return el;
+}
+function draw(){
+  let L=ITEMS.filter(i=>room==='all'||i.room===room);
+  if(sort==='asc')L=[...L].sort((a,b)=>a.new-b.new);
+  if(sort==='desc')L=[...L].sort((a,b)=>b.new-a.new);
+  if(sort==='save')L=[...L].sort((a,b)=>(b.old-b.new)-(a.old-a.new));
+  grid.innerHTML='';L.forEach(i=>grid.appendChild(card(i)));
+  if(!L.length)grid.innerHTML='<p class="empty">В этом разделе пока нет товаров.</p>';
+}
+sel.onchange=()=>{sort=sel.value;try{localStorage.setItem('tbd_sort',sort)}catch(e){};draw()};
+const modal=document.getElementById('modal'),mMsg=document.getElementById('mMsg');
+function openM(it){mMsg.textContent=`Здравствуйте! Хочу по акции −25%: модель №${it.n} — ${it.name}, ${fmt(it.new)}. Отложите, пожалуйста.`;modal.hidden=false;document.getElementById('mCopy').focus()}
+document.getElementById('mClose').onclick=()=>modal.hidden=true;
+modal.onclick=e=>{if(e.target===modal)modal.hidden=true};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.hidden=true});
+function copy(text,btn){
+  const done=()=>{const t=btn.textContent;btn.textContent='Скопировано';setTimeout(()=>btn.textContent=t,1600)};
+  if(navigator.clipboard)navigator.clipboard.writeText(text).then(done).catch(()=>{selectText(btn)});
+}
+function selectText(btn){const n=btn.parentElement.parentElement.querySelector('.msg,#ph');if(!n)return;const r=document.createRange();r.selectNodeContents(n);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+document.getElementById('mCopy').onclick=e=>copy(mMsg.textContent,e.currentTarget);
+document.getElementById('copyPh').onclick=e=>copy('89673729076',e.currentTarget);
+drawChips();draw();
+</script>
+
+</body></html>
