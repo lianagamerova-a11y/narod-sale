@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Посчитайте примерную цену кухни на заказ за минуту и запишитесь на бесплатный замер. Набережные Челны и Нижнекамск.">
-<meta property="og:title" content="Сколько будет стоить ваша кухня"><meta property="og:description" content="3 вопроса — и примерная цена по нашим последним кухням. Замер бесплатно.">
+<meta name="description" content="Посчитайте примерную цену кухни на заказ за минуту и получите бесплатный 3D-проект. Набережные Челны и Нижнекамск.">
+<meta property="og:title" content="Сколько будет стоить ваша кухня"><meta property="og:description" content="3 вопроса — и примерная цена по нашим последним кухням. 3D-проект бесплатно.">
 <style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Калькулятор кухни — Народная мебель</title>
 
@@ -128,7 +128,7 @@ a.btn{text-decoration:none;text-align:center}
 <header>
   <div class="brand">Калькулятор кухни</div>
   <h1>Сколько будет стоить <mark>ваша кухня</mark></h1>
-  <p class="intro">Ответьте на 3 вопроса — покажем примерную цену по нашим последним кухням и запишем на бесплатный замер. Набережные Челны и Нижнекамск.</p>
+  <p class="intro">Ответьте на 3 вопроса — покажем примерную цену по нашим последним кухням и сделаем бесплатный 3D-проект. Набережные Челны и Нижнекамск.</p>
 </header>
 <div class="steps" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 <main id="app"></main>
@@ -202,7 +202,7 @@ function render(){document.body.dataset.step=S.step;
   if(S.step===1){
     const sh=SHAPES[S.shape],w=S.sizes[S.shape];
     app.append(h(`<section class="card"><div><div class="qn">Вопрос 2 из 3</div><h2 class="q">Какой длины стены под кухню?</h2></div>
-      <p class="note" style="font-size:14px">Можно примерно — в метрах, по стене от угла до угла. Точно измерим на бесплатном замере.</p>
+      <p class="note" style="font-size:14px">Можно примерно — в метрах, по стене от угла до угла. Точно измерим на замере.</p>
       <div class="walls">${sh.walls.map((n,i)=>`<div class="wall"><label for="w${i}">${n}${S.shape==='island'&&i===1?'<small>обычно 1,2–3 м</small>':''}</label><div class="stepper"><button data-i="${i}" data-d="-0.1" aria-label="Меньше">−</button><input id="w${i}" data-i="${i}" inputmode="decimal" value="${m(w[i])}"><button data-i="${i}" data-d="0.1" aria-label="Больше">+</button></div></div>`).join('')}</div>
       <div class="total" id="tot"></div>${nav(true,true)}</section>`));
     const tot=()=>{document.getElementById('tot').innerHTML='Всего: <b>'+m(w.reduce((a,b)=>a+b,0))+' погонных метра</b>'};tot();
@@ -224,14 +224,14 @@ function render(){document.body.dataset.step=S.step;
     app.append(h(`<section class="card" aria-live="polite">
       <div><div class="res-label">Примерная цена вашей кухни</div><div class="price">${fmt(c.low)} – ${fmt(c.high)} ₽</div><div class="sub">это ${fmt(c.perLow)}–${fmt(c.perHigh)} ₽ за погонный метр</div></div>
       ${promo?`<div class="deal"><div class="res-label" style="color:var(--oak)">${PROMO_LABEL}</div><div class="price">${fmt(d(c.low))} – ${fmt(d(c.high))} ₽</div><div class="note">Скидка на модульные кухни и все допы к ним${OCT?'':'. В ноябре сверху ещё колесо фортуны — от 3 до 10%'}. Не суммируется с рассрочкой.</div></div>`:''}
-      <button class="btn main" id="toLead" type="button">Записаться на замер — бесплатно</button>
+      <button class="btn main" id="toLead" type="button">Получить бесплатный 3D-проект</button>
       <dl class="sum"><dt>Форма</dt><dd>${sh.name}</dd><dt>Размеры</dt><dd>${sizes} · ${m(c.L)} п.м.</dd><dt>Высота</dt><dd>${H.name}, ${H.h}</dd></dl>
       <div class="ex"><h3>Похожие кухни, которые мы сделали в 2026 году</h3><ul>${examples().map(e=>`<li>${e.n} — ${fmt(e.p)} ₽</li>`).join('')}</ul></div>
-      <p class="note">Цена примерная, по последним проектам «Народной мебели». Точная стоимость зависит от фасадов, столешницы и начинки — назовём её после бесплатного замера, до оплаты.</p>
+      <p class="note">Цена примерная, по последним проектам «Народной мебели». Точная стоимость зависит от фасадов, столешницы и начинки — назовём её после замера, до оплаты.</p>
       <button class="btn" id="back">Изменить ответы</button>
     </section>
     <section class="card lead" id="lead">
-      <div><div class="res-label" style="color:var(--oak)">Бесплатно</div><h2 class="q">Запишитесь на замер</h2><p class="note" style="font-size:15px">Замерщик приедет в удобное время, а дизайнер сделает проект кухни. Вы увидите точную цену до оплаты — ни к чему не обязывает.</p></div>
+      <div><div class="res-label" style="color:var(--oak)">3D-проект бесплатно</div><h2 class="q">Запишитесь на замер и проект</h2><p class="note" style="font-size:15px">Замерщик приедет в удобное время, а дизайнер бесплатно сделает 3D-проект кухни. Вы увидите точную цену до оплаты. Замер стоит 800 ₽ — при заказе кухни эти деньги вернём.</p></div>
       <form id="lf" novalidate>
         <div class="fld"><label for="ln">Ваше имя</label><input id="ln" autocomplete="given-name" value=""></div>
         <div class="fld"><label for="lp">Телефон</label><input id="lp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value=""><span class="err" id="lpe" hidden>Проверьте номер: нужно 10 цифр после +7</span></div>
@@ -239,11 +239,11 @@ function render(){document.body.dataset.step=S.step;
         <div class="fld"><label for="lt">Когда удобно на замер <span class="opt-l">— необязательно</span></label><input id="lt" placeholder="например, в субботу после 12" value=""></div>
         <label class="toggle" for="lok"><input type="checkbox" id="lok"><span><small style="color:var(--ink)">Согласен(на) на обработку персональных данных для связи по заявке</small></span></label>
         <input id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-        <button class="btn main" id="ls" type="submit">Отправить заявку на замер</button>
+        <button class="btn main" id="ls" type="submit">Отправить заявку</button>
       </form>
       <div id="done" hidden></div>
     </section>
-    <div class="sticky" id="sticky" hidden><button class="btn main" id="toLead2" type="button">Записаться на замер — бесплатно</button></div>`));
+    <div class="sticky" id="sticky" hidden><button class="btn main" id="toLead2" type="button">Получить бесплатный 3D-проект</button></div>`));
     const f=id=>document.getElementById(id);
     const goLead=()=>{f('lead').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});setTimeout(()=>{try{f('ln').focus({preventScroll:true})}catch(e){}},450)};
     f('toLead').onclick=goLead; f('toLead2').onclick=goLead;
@@ -258,7 +258,7 @@ function render(){document.body.dataset.step=S.step;
       if(dg.length!==10){f('lpe').hidden=false;f('lp').focus();return}
       f('lpe').hidden=true;
       const ph='+7 '+dg.slice(0,3)+' '+dg.slice(3,6)+'-'+dg.slice(6,8)+'-'+dg.slice(8);
-      const txt=`Заявка на бесплатный замер кухни\nИмя: ${L.name}\nТелефон: ${ph}\nГород: ${L.city}${L.time?`\nКогда удобно: ${L.time}`:''}\n\nРасчёт из калькулятора: ${sh.name.toLowerCase()} кухня, ${sizes} (${m(c.L)} п.м.), высота: ${H.name.toLowerCase()}.\nПримерная цена: ${fmt(c.low)}–${fmt(c.high)} ₽${promo?`, со скидкой 15%: ${fmt(d(c.low))}–${fmt(d(c.high))} ₽`:''}.\nИсточник: калькулятор кухни${SRC==='vk'?', ВКонтакте':SRC==='avito'?', Авито':''}.`;
+      const txt=`Заявка на замер и 3D-проект кухни\nИмя: ${L.name}\nТелефон: ${ph}\nГород: ${L.city}${L.time?`\nКогда удобно: ${L.time}`:''}\n\nРасчёт из калькулятора: ${sh.name.toLowerCase()} кухня, ${sizes} (${m(c.L)} п.м.), высота: ${H.name.toLowerCase()}.\nПримерная цена: ${fmt(c.low)}–${fmt(c.high)} ₽${promo?`, со скидкой 15%: ${fmt(d(c.low))}–${fmt(d(c.high))} ₽`:''}.\nИсточник: калькулятор кухни${SRC==='vk'?', ВКонтакте':SRC==='avito'?', Авито':''}.`;
       const clean=v=>String(v||'').replace(/^[=+\-@\s]+/,'');
       const payload={name:clean(L.name),phone:'8 ('+dg.slice(0,3)+') '+dg.slice(3,6)+'-'+dg.slice(6,8)+'-'+dg.slice(8),city:L.city,time:clean(L.time),shape:sh.name,sizes:sizes+' ('+m(c.L)+' п.м.)',height:H.name+', '+H.h,price:fmt(c.low)+'–'+fmt(c.high)+' ₽',priceDeal:promo?fmt(d(c.low))+'–'+fmt(d(c.high))+' ₽':'',src:SRC==='vk'?'ВКонтакте':SRC==='vkads'?'ВК таргет':SRC==='avito'?'Авито':(SRC||'сайт'),website:(f('hp')||{}).value||''};
       const btn=f('ls'); btn.disabled=true; btn.textContent='Отправляем…';
